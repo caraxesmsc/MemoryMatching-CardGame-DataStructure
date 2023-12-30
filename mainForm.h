@@ -193,10 +193,12 @@ namespace MemoryMatchingCardGameDataStructure {
 	private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+
+
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	//go to normal Mode form
- NormalModeForm^ normalModeForm = gcnew NormalModeForm();
+ NormalModeForm^ normalModeForm = gcnew NormalModeForm(playernametb->Text);
     normalModeForm->Show();
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {

@@ -120,11 +120,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="HardModeForm.cpp" />
     <ClCompile Include="mainForm.cpp" />
     <ClCompile Include="NormalModeForm.cpp" />
+    <ClCompile Include="Queue.cpp" />
+    <ClCompile Include="Stack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Card.h" />
     <ClInclude Include="HardModeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -134,6 +138,8 @@
     <ClInclude Include="NormalModeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Queue.hpp" />
+    <ClInclude Include="Stack.hpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="HardModeForm.resx">
@@ -145,6 +151,21 @@
     <EmbeddedResource Include="NormalModeForm.resx">
       <DependentUpon>NormalModeForm.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="CardsImages\10_of_spades.png" />
+    <Image Include="CardsImages\2_of_spades.png" />
+    <Image Include="CardsImages\3_of_spades.png" />
+    <Image Include="CardsImages\4_of_spades.png" />
+    <Image Include="CardsImages\5_of_spades.png" />
+    <Image Include="CardsImages\6_of_spades.png" />
+    <Image Include="CardsImages\7_of_spades.png" />
+    <Image Include="CardsImages\8_of_spades.png" />
+    <Image Include="CardsImages\9_of_spades.png" />
+    <Image Include="CardsImages\ace_of_spades.png" />
+    <Image Include="CardsImages\jack_of_spades2.png" />
+    <Image Include="CardsImages\king_of_spades2.png" />
+    <Image Include="CardsImages\queen_of_spades2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

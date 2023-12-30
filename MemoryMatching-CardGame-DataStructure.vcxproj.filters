@@ -24,6 +24,15 @@
     <ClCompile Include="HardModeForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Stack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Queue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainForm.h">
@@ -35,5 +44,55 @@
     <ClInclude Include="HardModeForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Queue.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="CardsImages\2_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\3_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\4_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\5_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\6_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\7_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\8_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\9_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\10_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\ace_of_spades.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\jack_of_spades2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\king_of_spades2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="CardsImages\queen_of_spades2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
