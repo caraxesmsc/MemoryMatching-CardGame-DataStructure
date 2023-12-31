@@ -1,26 +1,22 @@
 #pragma once
-#ifndef CARD_H
-#define CARD_H
 
 #include <string>
+#include <string>
+using namespace System;
 using namespace std;
 
-class Card
+
+ref class Card
 {
 public:
+    System::String^ CardName;
+    bool isShown;
 
-	string CardName;
+    // Constructors
+    Card();
+    Card(System::String^ x);
+    Card(int value);
 
-	string cardPath;
-	//image CardImage;
-	bool isShown;
-	Card();
-	Card(string x);
-	Card(int value);
-	Card(string y, string x);
-	void setShown(bool booleanVar);
-
-	//Card(const std::string& name, bool shown = false): CardName(name), isShown(shown) {}
-
+    // Method to set the 'isShown' property
+    void setShown(bool booleanVar);
 };
-#endif // CARD_H

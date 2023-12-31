@@ -16,7 +16,13 @@ namespace MemoryMatchingCardGameDataStructure {
 	{
 	public:
 		array<String^>^ cardPath = gcnew array<String^>(14);
+		array<String^>^ gridPath = gcnew array<String^>(12);
+		//Queue^ queue = gcnew Queue();
+		//Stack^ stack = gcnew Stack();
+		//Card^ card = gcnew Card();
 	private: System::Windows::Forms::Label^ labelPlayerName;
+	private: System::Windows::Forms::PictureBox^ pictureBox05;
+	private: System::Windows::Forms::PictureBox^ pictureBox15;
 	public:
 
 	public:
@@ -38,7 +44,18 @@ namespace MemoryMatchingCardGameDataStructure {
 			cardPath[12] = "CardsImages\\queen_of_spades.png";
 			cardPath[13] = "CardsImages\\king_of_spades.png";
 			//write code to shuffle this array.
-			
+			gridPath[0] = "CardsImages\\back.png";
+			gridPath[1] = "CardsImages\\back.png";
+			gridPath[2] = "CardsImages\\back.png";
+			gridPath[3] = "CardsImages\\back.png";
+			gridPath[4] = "CardsImages\\back.png";
+			gridPath[5] = "CardsImages\\back.png";
+			gridPath[6] = "CardsImages\\back.png";
+			gridPath[7] = "CardsImages\\back.png";
+			gridPath[8] = "CardsImages\\back.png";
+			gridPath[9] = "CardsImages\\back.png";
+			gridPath[10] = "CardsImages\\back.png";
+			gridPath[11] = "CardsImages\\back.png";
 
 
 			InitializeComponent();
@@ -62,6 +79,18 @@ namespace MemoryMatchingCardGameDataStructure {
 			cardPath[12] = "CardsImages\\queen_of_spades.png";
 			cardPath[13] = "CardsImages\\king_of_spades.png";
 			//write code to shuffle this array.
+			gridPath[0] = "CardsImages\\back.png";
+			gridPath[1] = "CardsImages\\back.png";
+			gridPath[2] = "CardsImages\\back.png";
+			gridPath[3] = "CardsImages\\back.png";
+			gridPath[4] = "CardsImages\\back.png";
+			gridPath[5] = "CardsImages\\back.png";
+			gridPath[6] = "CardsImages\\back.png";
+			gridPath[7] = "CardsImages\\back.png";
+			gridPath[8] = "CardsImages\\back.png";
+			gridPath[9] = "CardsImages\\back.png";
+			gridPath[10] = "CardsImages\\back.png";
+			gridPath[11] = "CardsImages\\back.png";
 
 
 
@@ -146,6 +175,8 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox14 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->labelPlayerName = (gcnew System::Windows::Forms::Label());
+			this->pictureBox05 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox15 = (gcnew System::Windows::Forms::PictureBox());
 			this->tableLayoutPanel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox13))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox12))->BeginInit();
@@ -158,6 +189,8 @@ namespace MemoryMatchingCardGameDataStructure {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox04))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox14))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox05))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox15))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -180,7 +213,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 22.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label2->ForeColor = System::Drawing::Color::Snow;
-			this->label2->Location = System::Drawing::Point(866, 192);
+			this->label2->Location = System::Drawing::Point(932, 189);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(204, 50);
 			this->label2->TabIndex = 3;
@@ -193,7 +226,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 22.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label3->ForeColor = System::Drawing::Color::Snow;
-			this->label3->Location = System::Drawing::Point(866, 259);
+			this->label3->Location = System::Drawing::Point(932, 255);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(125, 50);
 			this->label3->TabIndex = 4;
@@ -205,7 +238,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->normalBTN->Font = (gcnew System::Drawing::Font(L"Microsoft YaHei UI", 16.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->normalBTN->ForeColor = System::Drawing::Color::Snow;
-			this->normalBTN->Location = System::Drawing::Point(909, 515);
+			this->normalBTN->Location = System::Drawing::Point(950, 515);
 			this->normalBTN->Name = L"normalBTN";
 			this->normalBTN->Size = System::Drawing::Size(186, 59);
 			this->normalBTN->TabIndex = 10;
@@ -215,17 +248,19 @@ namespace MemoryMatchingCardGameDataStructure {
 			// tableLayoutPanel1
 			// 
 			this->tableLayoutPanel1->BackColor = System::Drawing::Color::DarkGreen;
-			this->tableLayoutPanel1->ColumnCount = 5;
+			this->tableLayoutPanel1->ColumnCount = 6;
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				50.95057F)));
+				50.55762F)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
-				49.04943F)));
+				49.44238F)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				135)));
+				138)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				144)));
+				136)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				127)));
+				130)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
+				121)));
 			this->tableLayoutPanel1->Controls->Add(this->pictureBox13, 3, 1);
 			this->tableLayoutPanel1->Controls->Add(this->pictureBox12, 2, 1);
 			this->tableLayoutPanel1->Controls->Add(this->pictureBox11, 1, 1);
@@ -236,27 +271,49 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->tableLayoutPanel1->Controls->Add(this->pictureBox00, 0, 0);
 			this->tableLayoutPanel1->Controls->Add(this->pictureBox04, 4, 0);
 			this->tableLayoutPanel1->Controls->Add(this->pictureBox14, 4, 1);
-			this->tableLayoutPanel1->Location = System::Drawing::Point(128, 175);
+			this->tableLayoutPanel1->Controls->Add(this->pictureBox05, 5, 0);
+			this->tableLayoutPanel1->Controls->Add(this->pictureBox15, 5, 1);
+			this->tableLayoutPanel1->Location = System::Drawing::Point(71, 174);
 			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
 			this->tableLayoutPanel1->RowCount = 2;
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(669, 361);
+			this->tableLayoutPanel1->Size = System::Drawing::Size(795, 361);
 			this->tableLayoutPanel1->TabIndex = 14;
 			// 
+			// pictureBox15
+			// 
+			this->pictureBox15->ImageLocation = gridPath[11];
+			this->pictureBox15->Location = System::Drawing::Point(676, 183);
+			this->pictureBox15->Name = L"pictureBox15";
+			this->pictureBox15->Size = System::Drawing::Size(116, 174);
+			this->pictureBox15->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox15->TabIndex = 11;
+			this->pictureBox15->TabStop = false;
+			// pictureBox14
+			// 
+			this->pictureBox14->ImageLocation= gridPath[10];
+			this->pictureBox14->Location = System::Drawing::Point(546, 183);
+			this->pictureBox14->Name = L"pictureBox14";
+			this->pictureBox14->Size = System::Drawing::Size(121, 174);
+			this->pictureBox14->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox14->TabIndex = 9;
+			this->pictureBox14->TabStop = false;
 			// pictureBox13
 			// 
-			this->pictureBox13->Location = System::Drawing::Point(401, 183);
+this->pictureBox13->ImageLocation = gridPath[9];
+			this->pictureBox13->Location = System::Drawing::Point(410, 183);
 			this->pictureBox13->Name = L"pictureBox13";
-			this->pictureBox13->Size = System::Drawing::Size(131, 174);
+			this->pictureBox13->Size = System::Drawing::Size(130, 174);
 			this->pictureBox13->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox13->TabIndex = 7;
 			this->pictureBox13->TabStop = false;
 			// 
 			// pictureBox12
 			// 
-			this->pictureBox12->Location = System::Drawing::Point(266, 183);
+this->pictureBox12->ImageLocation = gridPath[8];
+			this->pictureBox12->Location = System::Drawing::Point(272, 183);
 			this->pictureBox12->Name = L"pictureBox12";
 			this->pictureBox12->Size = System::Drawing::Size(127, 174);
 			this->pictureBox12->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
@@ -265,7 +322,8 @@ namespace MemoryMatchingCardGameDataStructure {
 			// 
 			// pictureBox11
 			// 
-			this->pictureBox11->Location = System::Drawing::Point(137, 183);
+this->pictureBox11->ImageLocation = gridPath[7];
+			this->pictureBox11->Location = System::Drawing::Point(139, 183);
 			this->pictureBox11->Name = L"pictureBox11";
 			this->pictureBox11->Size = System::Drawing::Size(123, 174);
 			this->pictureBox11->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
@@ -274,6 +332,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			// 
 			// pictureBox10
 			// 
+this->pictureBox10->ImageLocation = gridPath[6];
 			this->pictureBox10->Location = System::Drawing::Point(3, 183);
 			this->pictureBox10->Name = L"pictureBox10";
 			this->pictureBox10->Size = System::Drawing::Size(128, 174);
@@ -281,18 +340,38 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox10->TabIndex = 4;
 			this->pictureBox10->TabStop = false;
 			// 
+			// pictureBox05
+			// 
+			this->pictureBox05->ImageLocation = gridPath[5];
+			this->pictureBox05->Location = System::Drawing::Point(676, 3);
+			this->pictureBox05->Name = L"pictureBox05";
+			this->pictureBox05->Size = System::Drawing::Size(116, 174);
+			this->pictureBox05->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox05->TabIndex = 10;
+			this->pictureBox05->TabStop = false;
+			// pictureBox04
+			// 
+this->pictureBox04->ImageLocation = gridPath[4];
+			this->pictureBox04->Location = System::Drawing::Point(546, 3);
+			this->pictureBox04->Name = L"pictureBox04";
+			this->pictureBox04->Size = System::Drawing::Size(121, 174);
+			this->pictureBox04->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox04->TabIndex = 8;
+			this->pictureBox04->TabStop = false;
 			// pictureBox03
 			// 
-			this->pictureBox03->Location = System::Drawing::Point(401, 3);
+this->pictureBox03->ImageLocation = gridPath[3];
+			this->pictureBox03->Location = System::Drawing::Point(410, 3);
 			this->pictureBox03->Name = L"pictureBox03";
-			this->pictureBox03->Size = System::Drawing::Size(131, 174);
+			this->pictureBox03->Size = System::Drawing::Size(130, 174);
 			this->pictureBox03->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox03->TabIndex = 3;
 			this->pictureBox03->TabStop = false;
 			// 
 			// pictureBox02
 			// 
-			this->pictureBox02->Location = System::Drawing::Point(266, 3);
+this->pictureBox02->ImageLocation = gridPath[2];
+			this->pictureBox02->Location = System::Drawing::Point(272, 3);
 			this->pictureBox02->Name = L"pictureBox02";
 			this->pictureBox02->Size = System::Drawing::Size(127, 174);
 			this->pictureBox02->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
@@ -301,7 +380,8 @@ namespace MemoryMatchingCardGameDataStructure {
 			// 
 			// pictureBox01
 			// 
-			this->pictureBox01->Location = System::Drawing::Point(137, 3);
+this->pictureBox01->ImageLocation = gridPath[1];
+			this->pictureBox01->Location = System::Drawing::Point(139, 3);
 			this->pictureBox01->Name = L"pictureBox01";
 			this->pictureBox01->Size = System::Drawing::Size(123, 174);
 			this->pictureBox01->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
@@ -310,6 +390,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			// 
 			// pictureBox00
 			// 
+this->pictureBox00->ImageLocation = gridPath[0];
 			this->pictureBox00->Location = System::Drawing::Point(3, 3);
 			this->pictureBox00->Name = L"pictureBox00";
 			this->pictureBox00->Size = System::Drawing::Size(128, 174);
@@ -318,31 +399,17 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox00->TabStop = false;
 			this->pictureBox00->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox00_Click);
 			// 
-			// pictureBox04
+			
 			// 
-			this->pictureBox04->Location = System::Drawing::Point(545, 3);
-			this->pictureBox04->Name = L"pictureBox04";
-			this->pictureBox04->Size = System::Drawing::Size(121, 174);
-			this->pictureBox04->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox04->TabIndex = 8;
-			this->pictureBox04->TabStop = false;
-			// 
-			// pictureBox14
-			// 
-			this->pictureBox14->Location = System::Drawing::Point(545, 183);
-			this->pictureBox14->Name = L"pictureBox14";
-			this->pictureBox14->Size = System::Drawing::Size(121, 174);
-			this->pictureBox14->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox14->TabIndex = 9;
-			this->pictureBox14->TabStop = false;
+			
 			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
 			this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox1->Location = System::Drawing::Point(92, 127);
+			this->pictureBox1->Location = System::Drawing::Point(28, 127);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(749, 461);
+			this->pictureBox1->Size = System::Drawing::Size(882, 461);
 			this->pictureBox1->TabIndex = 15;
 			this->pictureBox1->TabStop = false;
 			// 
@@ -358,6 +425,10 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->labelPlayerName->Size = System::Drawing::Size(0, 50);
 			this->labelPlayerName->TabIndex = 16;
 			this->labelPlayerName->Click += gcnew System::EventHandler(this, &NormalModeForm::label4_Click);
+			// 
+			
+			// 
+			
 			// 
 			// NormalModeForm
 			// 
@@ -388,6 +459,8 @@ namespace MemoryMatchingCardGameDataStructure {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox04))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox14))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox05))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox15))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -396,6 +469,7 @@ namespace MemoryMatchingCardGameDataStructure {
 	
 private: System::Void NormalModeForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	labelPlayerName->Text = playerName;
+
 
 }
 private: System::Void pictureBox00_Click(System::Object^ sender, System::EventArgs^ e) {

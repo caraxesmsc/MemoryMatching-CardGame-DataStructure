@@ -138,8 +138,8 @@
     <ClInclude Include="NormalModeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="Queue.hpp" />
-    <ClInclude Include="Stack.hpp" />
+    <ClInclude Include="Queue.h" />
+    <ClInclude Include="Stack.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="HardModeForm.resx">

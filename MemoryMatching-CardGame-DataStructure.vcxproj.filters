@@ -24,13 +24,13 @@
     <ClCompile Include="HardModeForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Queue.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Stack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Queue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,10 +44,10 @@
     <ClInclude Include="HardModeForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Queue.hpp">
+    <ClInclude Include="Queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Stack.hpp">
+    <ClInclude Include="Stack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Card.h">
