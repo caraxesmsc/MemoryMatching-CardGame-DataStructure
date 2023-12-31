@@ -2,15 +2,15 @@
 #include "Card.h"
 #include <iostream>
 using namespace StackNamespace;
-Stack::Stack() : myTop(-1), myCapacity(DEFAULT_CAPACITY), myArray(gcnew System::Collections::Generic::List<CardNamespace::Card^>(DEFAULT_CAPACITY))
+StackNamespace::Stack::Stack() : myTop(-1), myCapacity(DEFAULT_CAPACITY), myArray(gcnew System::Collections::Generic::List<CardNamespace::Card^>(DEFAULT_CAPACITY))
 {
 }
 
-Stack::Stack(int numElements) : myTop(-1), myCapacity(numElements), myArray(gcnew System::Collections::Generic::List<CardNamespace::Card^>(numElements))
+StackNamespace::Stack::Stack(int numElements) : myTop(-1), myCapacity(numElements), myArray(gcnew System::Collections::Generic::List<CardNamespace::Card^>(numElements))
 {
 }
 
-const Stack^ Stack::operator=(const Stack^ rhs)
+const StackNamespace::Stack^ StackNamespace::Stack::operator=(const Stack^ rhs)
 {
     if (this != rhs)
     {
@@ -20,12 +20,12 @@ const Stack^ Stack::operator=(const Stack^ rhs)
     return this;
 }
 
-bool Stack::empty()
+bool StackNamespace::Stack::empty()
 {
     return myTop == -1;
 }
 
-void Stack::push(CardNamespace::Card^ value)
+void StackNamespace::Stack::push(CardNamespace::Card^ value)
 {
     if (myTop >= myCapacity - 1)
     {
@@ -37,7 +37,7 @@ void Stack::push(CardNamespace::Card^ value)
 }
 
 
-CardNamespace::Card^ Stack::top()
+CardNamespace::Card^ StackNamespace::Stack::top()
 {
     if (!empty())
         return myArray[myTop];
@@ -49,7 +49,7 @@ CardNamespace::Card^ Stack::top()
     }
 }
 
-//void Stack::display(ostream^ out)
+//void StackNamespace::Stack::display(ostream^ out)
 //{
 //    if (empty())
 //    {
@@ -63,7 +63,7 @@ CardNamespace::Card^ Stack::top()
 //    out << endl;
 //}
 
-void Stack::pop()
+void StackNamespace::Stack::pop()
 {
     if (!empty())
         myTop--;
@@ -73,7 +73,7 @@ void Stack::pop()
     }
 }
 
-void Stack::createObjectiveStack(System::Collections::Generic::List<int>^ indexArray)  // Change parameter type
+void StackNamespace::Stack::createObjectiveStack(System::Collections::Generic::List<int>^ indexArray)  // Change parameter type
 {
     for (int i = 0; i < 6; ++i)
     {

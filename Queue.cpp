@@ -1,29 +1,28 @@
 #include "Queue.h"
-#include "Stack.h"
 #include "Card.h"
 #include <vector>
-#include <cliext/vector>
+
 using namespace QueueNamespace;
 
 //--- Definition of Queue constructor
-Queue::Queue()
+QueueNamespace::Queue::Queue()
     : myFront(nullptr), myBack(nullptr)
 {}
 
 //--- Definition of Queue copy constructor
-Queue::Queue( Queue^ original)
+QueueNamespace::Queue::Queue( Queue^ original)
 {
     myFront = myBack = nullptr;
     if (!original->empty())
     {
         // Copy first node
-        myFront = myBack = gcnew Queue::Node(original->frontQueue()->myFront->data,nullptr);
+        myFront = myBack = gcnew QueueNamespace::Queue::Node(original->frontQueue()->myFront->data,nullptr);
 
         // Set pointer to run through original's linked list
-        Queue::NodePointer origPtr = original->myFront->next;
+        QueueNamespace::Queue::NodePointer origPtr = original->myFront->next;
         while (origPtr != nullptr)
         {
-            myBack->next = gcnew Queue::Node(origPtr->data,nullptr);
+            myBack->next = gcnew QueueNamespace::Queue::Node(origPtr->data,nullptr);
             myBack = myBack->next;
             origPtr = origPtr->next;
         }
@@ -31,10 +30,10 @@ Queue::Queue( Queue^ original)
 }
 
 //--- Definition of Queue destructor
-Queue::~Queue()
+QueueNamespace::Queue::~Queue()
 {
     // Set pointer to run through the queue
-    Queue::NodePointer prev = myFront,
+    QueueNamespace::Queue::NodePointer prev = myFront,
         ptr;
     while (prev != nullptr)
     {
@@ -44,7 +43,7 @@ Queue::~Queue()
     }
 }
 //--- Definition of assignment operator
- Queue^ Queue::operator= ( Queue^ rightHandSide)
+QueueNamespace::Queue^ QueueNamespace::Queue::operator= ( Queue^ rightHandSide)
 {
     if (this != rightHandSide)
     {
@@ -66,13 +65,13 @@ Queue::~Queue()
 
 
 //--- Definition of empty()
-Boolean^ Queue::empty()
+Boolean QueueNamespace::Queue::empty()
 {
     return (myFront == nullptr);
 }
 
 //--- Definition of enqueue()
-void Queue::enqueue(CardNamespace::Card^ value)
+void QueueNamespace::Queue::enqueue(CardNamespace::Card^ value)
 {
     NodePointer newptr = gcnew Node(value,nullptr);
     if (empty())
@@ -86,9 +85,9 @@ void Queue::enqueue(CardNamespace::Card^ value)
 
 
 //--- Definition of display()
-//void Queue::display(ostream^ out) const
+//void QueueNamespace::Queue::display(ostream^ out) const
 //{
-  //  Queue::NodePointer ptr;
+  //  QueueNamespace::Queue::NodePointer ptr;
     //for (ptr = myFront; ptr != 0; ptr = ptr->next)
       //  out << ptr->data->CardName << "  ";
     //out << endl;
@@ -102,14 +101,14 @@ void Queue::enqueue(CardNamespace::Card^ value)
 //}
 
 //front for Queue.
-Queue^ Queue::frontQueue() {
+QueueNamespace::Queue^ QueueNamespace::Queue::frontQueue() {
 	Queue^ temp = gcnew Queue();
 	temp->enqueue(myFront->data);
 	return temp;
 }
 
 //--- Definition of front()
-CardNamespace::Card^ Queue::front() 
+CardNamespace::Card^ QueueNamespace::Queue::front() 
 {
     if (! empty())
         return myFront->data;
@@ -121,11 +120,11 @@ CardNamespace::Card^ Queue::front()
 }
 
 //--- Definition of dequeue()
-void Queue::dequeue()
+void QueueNamespace::Queue::dequeue()
 {
     if (!empty())
     {
-        Queue::NodePointer ptr = myFront;
+        QueueNamespace::Queue::NodePointer ptr = myFront;
         myFront = myFront->next;
         delete ptr;
         if (myFront == nullptr)     // queue is now empty
@@ -135,7 +134,7 @@ void Queue::dequeue()
         cerr << "*** Queue is empty -- can't remove a value ***\n";
 }
 
-void Queue::deleteQueue() {
+void QueueNamespace::Queue::deleteQueue() {
     while (myFront != nullptr) {
         Node^ temp = myFront;
         myFront = myFront->next;
@@ -144,7 +143,7 @@ void Queue::deleteQueue() {
     myBack = nullptr;
 }
 
-void Queue::printCards() {
+void QueueNamespace::Queue::printCards() {
     Node^ current = myFront;
     while (current != nullptr) {
         //cout << current->data->CardName << " ";
@@ -152,7 +151,7 @@ void Queue::printCards() {
     }
     cout << endl;
 }
-bool Queue::ismatched(Queue^ card1, Queue^ card2) {
+bool QueueNamespace::Queue::ismatched(Queue^ card1, Queue^ card2) {
     if (card1->empty() || card2->empty()) {
         return false;
     }
@@ -161,10 +160,10 @@ bool Queue::ismatched(Queue^ card1, Queue^ card2) {
 
     return (match1->CardName == match2->CardName);
 }
-bool Queue::checkMatch(int loc1, int loc2) {
+bool QueueNamespace::Queue::checkMatch(int loc1, int loc2) {
 
-    Queue::Node^ head1 = myFront;
-    Queue::Node^ head2 = myFront;
+    QueueNamespace::Queue::Node^ head1 = myFront;
+    QueueNamespace::Queue::Node^ head2 = myFront;
 
     for (int i = 0; i < loc1; i++) {
         head1 = head1->next;
@@ -181,9 +180,9 @@ bool Queue::checkMatch(int loc1, int loc2) {
     }
     return false;
 }
-bool Queue::checkMatchHard(CardNamespace::Card^ card1, int loc2) {
+bool QueueNamespace::Queue::checkMatchHard(CardNamespace::Card^ card1, int loc2) {
 
-    Queue::Node^ head2 = myFront;
+    QueueNamespace::Queue::Node^ head2 = myFront;
 
 
     for (int i = 0; i < loc2; i++) {
@@ -197,7 +196,7 @@ bool Queue::checkMatchHard(CardNamespace::Card^ card1, int loc2) {
     }
     return false;
 }
-bool Queue::checkMatchCards(CardNamespace::Card^ card1, CardNamespace::Card^ card2) {
+bool QueueNamespace::Queue::checkMatchCards(CardNamespace::Card^ card1, CardNamespace::Card^ card2) {
 
     if (card1->CardName == card2->CardName) {
         card1->isShown = true;
@@ -207,7 +206,7 @@ bool Queue::checkMatchCards(CardNamespace::Card^ card1, CardNamespace::Card^ car
     }
     return false;
 }
-void Queue::displayGrid() {
+void QueueNamespace::Queue::displayGrid() {
     Node^ current = myFront;
     for (int i = 0; i < 12; i++) {
         if (current->data->isShown) {
@@ -222,15 +221,15 @@ void Queue::displayGrid() {
         current = current->next;
     }
 }
-void Queue::createShuffledQueue(int* indexArray) {
+void QueueNamespace::Queue::createShuffledQueue(System::Collections::Generic::List<int>^ indexArray) {
     // Duplicate indices to create pairs
-    int shuffledIndices[12];
-    int* shuffledIndexPtr = indexArray;  // Create a separate pointer
+    Int32 shuffledIndices[12];
+    //Int32^ shuffledIndexPtr = indexArray;  // Create a separate pointer
 
     for (int i = 0; i < 6; ++i) {
-        shuffledIndices[i * 2] = *shuffledIndexPtr;
-        shuffledIndices[i * 2 + 1] = *shuffledIndexPtr;
-        shuffledIndexPtr++;
+        shuffledIndices[i * 2] = indexArray[i];
+        shuffledIndices[i * 2 + 1] = indexArray[i];
+        //shuffledIndexPtr= shuffledIndexPtr->;
     }
 
     System::Collections::Generic::List<int>^ shuffledVector = gcnew System::Collections::Generic::List<int>();
@@ -252,7 +251,7 @@ void Queue::createShuffledQueue(int* indexArray) {
 
 
 // Custom shuffle function (Fisher-Yates algorithm)
-void Queue::shuffleArray(System::Collections::Generic::List<int>^ arr, int size) {
+void QueueNamespace::Queue::shuffleArray(System::Collections::Generic::List<int>^ arr, int size) {
     for (int i = size - 1; i > 0; --i) {
         srand(time(nullptr));
 
@@ -263,9 +262,9 @@ void Queue::shuffleArray(System::Collections::Generic::List<int>^ arr, int size)
         arr[j] = temp;
     }
 }
-int Queue::chooseCard() {
+int QueueNamespace::Queue::chooseCard() {
     int loc;
-    Queue::Node^ head1 = myFront;
+    QueueNamespace::Queue::Node^ head1 = myFront;
     cout << "Enter location (0-11): ";
     cin >> loc;
     for (int i = 0; i < loc; i++) {
@@ -274,9 +273,9 @@ int Queue::chooseCard() {
     //cout << "you chose location " << loc << " card is " << head1->data->CardName << endl;
     return loc;
 }
-void Queue::searchCard(CardNamespace::Card^ card1) {
+void QueueNamespace::Queue::searchCard(CardNamespace::Card^ card1) {
 
-    Queue::Node^ head1 = myFront;
+    QueueNamespace::Queue::Node^ head1 = myFront;
     while (head1->data->CardName != card1->CardName) {
         head1 = head1->next;
     }
@@ -284,7 +283,7 @@ void Queue::searchCard(CardNamespace::Card^ card1) {
     head1->data->isShown = true;
 }
 
-bool Queue::isGameOver(int n) {
+bool QueueNamespace::Queue::isGameOver(int n) {
     if (n == 0) {
         cout << " Game Over !";
         return false;

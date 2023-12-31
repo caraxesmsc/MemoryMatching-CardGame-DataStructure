@@ -1,20 +1,6 @@
 #pragma once
-
-namespace QueueNamespace {
-
-	#include "Queue.h"
-	ref class Queue;
-}
-
-namespace StackNamespace {
-	#include "Stack.h"
-	ref class Stack;
-}
-
-namespace CardNamespace {
-	#include "Card.h"
-	ref class Card;
-}
+#include <ctime>
+#include <stdlib.h>
 
 namespace MemoryMatchingCardGameDataStructure {
 
@@ -24,19 +10,23 @@ namespace MemoryMatchingCardGameDataStructure {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	//#include "Queue.h"
 
-	/// <summary>
-	/// Summary for NormalModeForm
-	/// </summary>
+			/// <summary>
+			/// Summary for NormalModeForm
+			/// </summary>
 	public ref class NormalModeForm : public System::Windows::Forms::Form
 	{
 	public:
 		array<String^>^ cardPath = gcnew array<String^>(14);
 		array<String^>^ gridPath = gcnew array<String^>(12);
+		
+		Int32^ touches=0;
 
-		QueueNamespace::Queue^ queue = gcnew QueueNamespace::Queue();
-		StackNamespace::Stack^ stack = gcnew StackNamespace::Stack();
-		CardNamespace::Card^ card = gcnew CardNamespace::Card();
+		System::Collections::Generic::List<int>^ indices;
+		System::Collections::Generic::List<int>^ shuffledIndices;
+
+		/*	StackNamespace::Stack^ stack = gcnew StackNamespace::Stack(); */
 
 	private: System::Windows::Forms::Label^ labelPlayerName;
 	private: System::Windows::Forms::PictureBox^ pictureBox05;
@@ -77,10 +67,37 @@ namespace MemoryMatchingCardGameDataStructure {
 
 
 			InitializeComponent();
-			
+
 		}
 		NormalModeForm(String^ x)
 		{
+
+			indices = gcnew System::Collections::Generic::List<int>(6);
+			shuffledIndices = gcnew System::Collections::Generic::List<int>(12);
+
+			srand(time(NULL));
+
+			// Populate indices with values 1-6
+			for (int i = 0; i < 6; i++) {
+				indices->Add(i + 1); // Add values 1-6 to indices
+			}
+
+			// Duplicate values in shuffledIndices
+			for (int i = 0; i < 6; ++i) {
+				shuffledIndices->Add(indices[i]);
+				shuffledIndices->Add(indices[i]);
+			}
+
+			// Shuffle the values in shuffledIndices
+			Random^ rand = gcnew Random();
+			for (int i = 11; i > 0; --i) {
+				int j = rand->Next(0, i + 1);
+				// Swap shuffledIndices[i] and shuffledIndices[j]
+				int temp = shuffledIndices[i];
+				shuffledIndices[i] = shuffledIndices[j];
+				shuffledIndices[j] = temp;
+			}
+
 			playerName = x;
 			cardPath[0] = "CardsImages\\back.png";
 			cardPath[1] = "CardsImages\\ace_of_spades.png";
@@ -166,7 +183,7 @@ namespace MemoryMatchingCardGameDataStructure {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -191,10 +208,10 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox00 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox04 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox14 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->labelPlayerName = (gcnew System::Windows::Forms::Label());
 			this->pictureBox05 = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox15 = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->labelPlayerName = (gcnew System::Windows::Forms::Label());
 			this->tableLayoutPanel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox13))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox12))->BeginInit();
@@ -206,9 +223,9 @@ namespace MemoryMatchingCardGameDataStructure {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox00))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox04))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox14))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox05))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox15))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
@@ -278,7 +295,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
 				130)));
 			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute,
-				121)));
+				122)));
 			this->tableLayoutPanel1->Controls->Add(this->pictureBox13, 3, 1);
 			this->tableLayoutPanel1->Controls->Add(this->pictureBox12, 2, 1);
 			this->tableLayoutPanel1->Controls->Add(this->pictureBox11, 1, 1);
@@ -300,115 +317,78 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->tableLayoutPanel1->Size = System::Drawing::Size(795, 361);
 			this->tableLayoutPanel1->TabIndex = 14;
 			// 
-			// pictureBox15
-			// 
-			this->pictureBox15->ImageLocation = gridPath[11];
-			this->pictureBox15->Location = System::Drawing::Point(676, 183);
-			this->pictureBox15->Name = L"pictureBox15";
-			this->pictureBox15->Size = System::Drawing::Size(116, 174);
-			this->pictureBox15->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox15->TabIndex = 11;
-			this->pictureBox15->TabStop = false;
-			// pictureBox14
-			// 
-			this->pictureBox14->ImageLocation= gridPath[10];
-			this->pictureBox14->Location = System::Drawing::Point(546, 183);
-			this->pictureBox14->Name = L"pictureBox14";
-			this->pictureBox14->Size = System::Drawing::Size(121, 174);
-			this->pictureBox14->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox14->TabIndex = 9;
-			this->pictureBox14->TabStop = false;
 			// pictureBox13
 			// 
-this->pictureBox13->ImageLocation = gridPath[9];
 			this->pictureBox13->Location = System::Drawing::Point(410, 183);
 			this->pictureBox13->Name = L"pictureBox13";
 			this->pictureBox13->Size = System::Drawing::Size(130, 174);
 			this->pictureBox13->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox13->TabIndex = 7;
 			this->pictureBox13->TabStop = false;
+			this->pictureBox13->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox13_Click);
 			// 
 			// pictureBox12
 			// 
-this->pictureBox12->ImageLocation = gridPath[8];
 			this->pictureBox12->Location = System::Drawing::Point(272, 183);
 			this->pictureBox12->Name = L"pictureBox12";
 			this->pictureBox12->Size = System::Drawing::Size(127, 174);
 			this->pictureBox12->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox12->TabIndex = 6;
 			this->pictureBox12->TabStop = false;
+			this->pictureBox12->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox12_Click);
 			// 
 			// pictureBox11
 			// 
-this->pictureBox11->ImageLocation = gridPath[7];
 			this->pictureBox11->Location = System::Drawing::Point(139, 183);
 			this->pictureBox11->Name = L"pictureBox11";
 			this->pictureBox11->Size = System::Drawing::Size(123, 174);
 			this->pictureBox11->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox11->TabIndex = 5;
 			this->pictureBox11->TabStop = false;
+			this->pictureBox11->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox11_Click);
 			// 
 			// pictureBox10
 			// 
-this->pictureBox10->ImageLocation = gridPath[6];
 			this->pictureBox10->Location = System::Drawing::Point(3, 183);
 			this->pictureBox10->Name = L"pictureBox10";
 			this->pictureBox10->Size = System::Drawing::Size(128, 174);
 			this->pictureBox10->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox10->TabIndex = 4;
 			this->pictureBox10->TabStop = false;
+			this->pictureBox10->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox10_Click);
 			// 
-			// pictureBox05
-			// 
-			this->pictureBox05->ImageLocation = gridPath[5];
-			this->pictureBox05->Location = System::Drawing::Point(676, 3);
-			this->pictureBox05->Name = L"pictureBox05";
-			this->pictureBox05->Size = System::Drawing::Size(116, 174);
-			this->pictureBox05->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox05->TabIndex = 10;
-			this->pictureBox05->TabStop = false;
-			// pictureBox04
-			// 
-this->pictureBox04->ImageLocation = gridPath[4];
-			this->pictureBox04->Location = System::Drawing::Point(546, 3);
-			this->pictureBox04->Name = L"pictureBox04";
-			this->pictureBox04->Size = System::Drawing::Size(121, 174);
-			this->pictureBox04->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
-			this->pictureBox04->TabIndex = 8;
-			this->pictureBox04->TabStop = false;
 			// pictureBox03
 			// 
-this->pictureBox03->ImageLocation = gridPath[3];
 			this->pictureBox03->Location = System::Drawing::Point(410, 3);
 			this->pictureBox03->Name = L"pictureBox03";
 			this->pictureBox03->Size = System::Drawing::Size(130, 174);
 			this->pictureBox03->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox03->TabIndex = 3;
 			this->pictureBox03->TabStop = false;
+			this->pictureBox03->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox03_Click);
 			// 
 			// pictureBox02
 			// 
-this->pictureBox02->ImageLocation = gridPath[2];
 			this->pictureBox02->Location = System::Drawing::Point(272, 3);
 			this->pictureBox02->Name = L"pictureBox02";
 			this->pictureBox02->Size = System::Drawing::Size(127, 174);
 			this->pictureBox02->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox02->TabIndex = 2;
 			this->pictureBox02->TabStop = false;
+			this->pictureBox02->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox02_Click);
 			// 
 			// pictureBox01
 			// 
-this->pictureBox01->ImageLocation = gridPath[1];
 			this->pictureBox01->Location = System::Drawing::Point(139, 3);
 			this->pictureBox01->Name = L"pictureBox01";
 			this->pictureBox01->Size = System::Drawing::Size(123, 174);
 			this->pictureBox01->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox01->TabIndex = 1;
 			this->pictureBox01->TabStop = false;
+			this->pictureBox01->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox01_Click);
 			// 
 			// pictureBox00
 			// 
-this->pictureBox00->ImageLocation = gridPath[0];
 			this->pictureBox00->Location = System::Drawing::Point(3, 3);
 			this->pictureBox00->Name = L"pictureBox00";
 			this->pictureBox00->Size = System::Drawing::Size(128, 174);
@@ -417,9 +397,45 @@ this->pictureBox00->ImageLocation = gridPath[0];
 			this->pictureBox00->TabStop = false;
 			this->pictureBox00->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox00_Click);
 			// 
-			
+			// pictureBox04
 			// 
-			
+			this->pictureBox04->Location = System::Drawing::Point(546, 3);
+			this->pictureBox04->Name = L"pictureBox04";
+			this->pictureBox04->Size = System::Drawing::Size(121, 174);
+			this->pictureBox04->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox04->TabIndex = 8;
+			this->pictureBox04->TabStop = false;
+			this->pictureBox04->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox04_Click);
+			// 
+			// pictureBox14
+			// 
+			this->pictureBox14->Location = System::Drawing::Point(546, 183);
+			this->pictureBox14->Name = L"pictureBox14";
+			this->pictureBox14->Size = System::Drawing::Size(121, 174);
+			this->pictureBox14->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox14->TabIndex = 9;
+			this->pictureBox14->TabStop = false;
+			this->pictureBox14->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox14_Click);
+			// 
+			// pictureBox05
+			// 
+			this->pictureBox05->Location = System::Drawing::Point(676, 3);
+			this->pictureBox05->Name = L"pictureBox05";
+			this->pictureBox05->Size = System::Drawing::Size(116, 174);
+			this->pictureBox05->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox05->TabIndex = 10;
+			this->pictureBox05->TabStop = false;
+			this->pictureBox05->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox05_Click);
+			// 
+			// pictureBox15
+			// 
+			this->pictureBox15->Location = System::Drawing::Point(676, 183);
+			this->pictureBox15->Name = L"pictureBox15";
+			this->pictureBox15->Size = System::Drawing::Size(116, 174);
+			this->pictureBox15->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pictureBox15->TabIndex = 11;
+			this->pictureBox15->TabStop = false;
+			this->pictureBox15->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox15_Click);
 			// 
 			// pictureBox1
 			// 
@@ -442,10 +458,6 @@ this->pictureBox00->ImageLocation = gridPath[0];
 			this->labelPlayerName->Name = L"labelPlayerName";
 			this->labelPlayerName->Size = System::Drawing::Size(0, 50);
 			this->labelPlayerName->TabIndex = 16;
-			this->labelPlayerName->Click += gcnew System::EventHandler(this, &NormalModeForm::label4_Click);
-			// 
-			
-			// 
 			
 			// 
 			// NormalModeForm
@@ -476,23 +488,120 @@ this->pictureBox00->ImageLocation = gridPath[0];
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox00))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox04))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox14))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox05))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox15))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+
+	private: System::Void NormalModeForm_Load(System::Object^ sender, System::EventArgs^ e) {
+		labelPlayerName->Text = playerName;
+		pictureBox00->ImageLocation = gridPath[0];
+		pictureBox01->ImageLocation = gridPath[1];
+		pictureBox02->ImageLocation = gridPath[2];
+		pictureBox03->ImageLocation = gridPath[3];
+		pictureBox04->ImageLocation = gridPath[4];
+		pictureBox05->ImageLocation = gridPath[5];
+		pictureBox10->ImageLocation = gridPath[6];
+		pictureBox11->ImageLocation = gridPath[7];
+		pictureBox12->ImageLocation = gridPath[8];
+		pictureBox13->ImageLocation = gridPath[9];
+		pictureBox14->ImageLocation = gridPath[10];
+		pictureBox15->ImageLocation = gridPath[11];
+		pictureBox00->Load();
+		pictureBox01->Load();
+		pictureBox02->Load();
+		pictureBox03->Load();
+		pictureBox04->Load();
+		pictureBox05->Load();
+		pictureBox10->Load();
+		pictureBox11->Load();
+		pictureBox12->Load();
+		pictureBox13->Load();
+		pictureBox14->Load();
+		pictureBox15->Load();
+
+
+	}
+	private: System::Void pictureBox00_Click(System::Object^ sender, System::EventArgs^ e) {
+		gridPath[0] = cardPath[shuffledIndices[0]];
+		pictureBox00->ImageLocation = gridPath[0];
+		pictureBox00->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox00->Load();
+
+	}
 	
-private: System::Void NormalModeForm_Load(System::Object^ sender, System::EventArgs^ e) {
-	labelPlayerName->Text = playerName;
+	private: System::Void pictureBox01_Click(System::Object^ sender, System::EventArgs^ e) {
+		gridPath[1] = cardPath[shuffledIndices[1]];
+		pictureBox01->ImageLocation = gridPath[1];
+		pictureBox01->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox01->Load();
+	}
+	//continue for the rest.
 
 
+private: System::Void pictureBox02_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[2] = cardPath[shuffledIndices[2]];
+	pictureBox02->ImageLocation = gridPath[2];
+	pictureBox02->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox02->Load();
 }
-private: System::Void pictureBox00_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void pictureBox03_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[3] = cardPath[shuffledIndices[3]];
+	pictureBox03->ImageLocation = gridPath[3];
+	pictureBox03->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox03->Load();
 }
-private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+private: System::Void pictureBox04_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[4] = cardPath[shuffledIndices[4]];
+	pictureBox04->ImageLocation = gridPath[4];
+	pictureBox04->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox04->Load();
+}
+private: System::Void pictureBox05_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[5] = cardPath[shuffledIndices[5]];
+	pictureBox05->ImageLocation = gridPath[5];
+	pictureBox05->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox05->Load();
+}
+private: System::Void pictureBox10_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[6] = cardPath[shuffledIndices[6]];
+	pictureBox10->ImageLocation = gridPath[6];
+	pictureBox10->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox10->Load();
+}
+private: System::Void pictureBox11_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[7] = cardPath[shuffledIndices[7]];
+	pictureBox11->ImageLocation = gridPath[7];
+	pictureBox11->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox11->Load();
+}
+private: System::Void pictureBox12_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[8] = cardPath[shuffledIndices[8]];
+	pictureBox12->ImageLocation = gridPath[8];
+	pictureBox12->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox12->Load();
+}
+private: System::Void pictureBox13_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[9] = cardPath[shuffledIndices[9]];
+	pictureBox13->ImageLocation = gridPath[9];
+	pictureBox13->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox13->Load();
+}
+private: System::Void pictureBox14_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[10] = cardPath[shuffledIndices[10]];
+	pictureBox14->ImageLocation = gridPath[10];
+	pictureBox14->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox14->Load();
+}
+private: System::Void pictureBox15_Click(System::Object^ sender, System::EventArgs^ e) {
+gridPath[11] = cardPath[shuffledIndices[11]];
+	pictureBox15->ImageLocation = gridPath[11];
+	pictureBox15->SizeMode = PictureBoxSizeMode::Zoom;
+	pictureBox15->Load();
 }
 };
 }

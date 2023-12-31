@@ -3,7 +3,12 @@
 #include <cliext/list>  // Include cliext::list for compatibility
 
 //using namespace System::Collections::Generic;  // Optional for unqualified List<T>
-
+using namespace System;
+using namespace System::ComponentModel;
+using namespace System::Collections;
+using namespace System::Windows::Forms;
+using namespace System::Data;
+using namespace System::Drawing;
 const int DEFAULT_CAPACITY = 128;
 namespace StackNamespace {
     ref class Stack

@@ -167,6 +167,9 @@
     <Image Include="CardsImages\king_of_spades2.png" />
     <Image Include="CardsImages\queen_of_spades2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

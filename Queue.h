@@ -1,7 +1,16 @@
 #pragma once
+#ifndef QUEUE_H
+#define QUEUE_H
 #include "Card.h"
 #include <iostream>
 #include <vector>
+using namespace System;
+using namespace System::ComponentModel;
+using namespace System::Collections;
+using namespace System::Windows::Forms;
+using namespace System::Data;
+using namespace System::Drawing;
+
 
 namespace QueueNamespace {
     ref class Queue
@@ -11,7 +20,7 @@ namespace QueueNamespace {
         Queue(Queue^ original);  // Change here
         ~Queue();
         Queue^ operator= (Queue^ rightHandSide);  // Change here
-        Boolean^ empty();
+        Boolean empty();
         void enqueue(CardNamespace::Card^ value);
         Queue^ frontQueue();
         CardNamespace::Card^ front();
@@ -19,7 +28,7 @@ namespace QueueNamespace {
         void deleteQueue();
         void printCards();
         void displayGrid();
-        void createShuffledQueue(int* array);
+        void createShuffledQueue(System::Collections::Generic::List<int>^ array);
         void shuffleArray(System::Collections::Generic::List<int>^ arr, int size);
         bool ismatched(Queue^ card1, Queue^ card2);
         bool checkMatch(int loc1, int loc2);
@@ -46,3 +55,4 @@ namespace QueueNamespace {
         NodePointer myFront, myBack;
     };
 }
+#endif
