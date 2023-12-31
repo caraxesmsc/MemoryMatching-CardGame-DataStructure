@@ -1,5 +1,21 @@
 #pragma once
 
+namespace QueueNamespace {
+
+	#include "Queue.h"
+	ref class Queue;
+}
+
+namespace StackNamespace {
+	#include "Stack.h"
+	ref class Stack;
+}
+
+namespace CardNamespace {
+	#include "Card.h"
+	ref class Card;
+}
+
 namespace MemoryMatchingCardGameDataStructure {
 
 	using namespace System;
@@ -17,9 +33,11 @@ namespace MemoryMatchingCardGameDataStructure {
 	public:
 		array<String^>^ cardPath = gcnew array<String^>(14);
 		array<String^>^ gridPath = gcnew array<String^>(12);
-		//Queue^ queue = gcnew Queue();
-		//Stack^ stack = gcnew Stack();
-		//Card^ card = gcnew Card();
+
+		QueueNamespace::Queue^ queue = gcnew QueueNamespace::Queue();
+		StackNamespace::Stack^ stack = gcnew StackNamespace::Stack();
+		CardNamespace::Card^ card = gcnew CardNamespace::Card();
+
 	private: System::Windows::Forms::Label^ labelPlayerName;
 	private: System::Windows::Forms::PictureBox^ pictureBox05;
 	private: System::Windows::Forms::PictureBox^ pictureBox15;

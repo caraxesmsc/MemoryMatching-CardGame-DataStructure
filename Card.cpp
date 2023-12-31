@@ -2,7 +2,7 @@
 #include <string>
 using namespace System;
 using namespace std;
-
+using namespace CardNamespace;
 
 // Default constructor
 Card::Card() : isShown(false) {}

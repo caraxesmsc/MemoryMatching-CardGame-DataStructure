@@ -3,7 +3,7 @@
 #include "Card.h"
 #include <vector>
 #include <cliext/vector>
-
+using namespace QueueNamespace;
 
 //--- Definition of Queue constructor
 Queue::Queue()
@@ -72,7 +72,7 @@ Boolean^ Queue::empty()
 }
 
 //--- Definition of enqueue()
-void Queue::enqueue(Card^ value)
+void Queue::enqueue(CardNamespace::Card^ value)
 {
     NodePointer newptr = gcnew Node(value,nullptr);
     if (empty())
@@ -109,14 +109,14 @@ Queue^ Queue::frontQueue() {
 }
 
 //--- Definition of front()
-Card^ Queue::front() 
+CardNamespace::Card^ Queue::front() 
 {
     if (! empty())
         return myFront->data;
     else
     {
         cerr << "*** Queue is empty -- returning garbage ***\n";
-        return gcnew Card(); // Use gcnew for creating an instance
+        return gcnew CardNamespace::Card(); // Use gcnew for creating an instance
     }
 }
 
@@ -156,8 +156,8 @@ bool Queue::ismatched(Queue^ card1, Queue^ card2) {
     if (card1->empty() || card2->empty()) {
         return false;
     }
-    Card^ match1 = card1->front();
-    Card^ match2 = card2->front();
+    CardNamespace::Card^ match1 = card1->front();
+    CardNamespace::Card^ match2 = card2->front();
 
     return (match1->CardName == match2->CardName);
 }
@@ -181,7 +181,7 @@ bool Queue::checkMatch(int loc1, int loc2) {
     }
     return false;
 }
-bool Queue::checkMatchHard(Card^ card1, int loc2) {
+bool Queue::checkMatchHard(CardNamespace::Card^ card1, int loc2) {
 
     Queue::Node^ head2 = myFront;
 
@@ -197,7 +197,7 @@ bool Queue::checkMatchHard(Card^ card1, int loc2) {
     }
     return false;
 }
-bool Queue::checkMatchCards(Card^ card1, Card^ card2) {
+bool Queue::checkMatchCards(CardNamespace::Card^ card1, CardNamespace::Card^ card2) {
 
     if (card1->CardName == card2->CardName) {
         card1->isShown = true;
@@ -246,7 +246,7 @@ void Queue::createShuffledQueue(int* indexArray) {
     for (int i = 0; i < 12; ++i) {
         //convert from int to string.
         String^ cardName = System::Int32(shuffledVector[i]).ToString() ;
-        enqueue(gcnew Card(cardName));
+        enqueue(gcnew CardNamespace::Card(cardName));
     }
 }
 
@@ -274,7 +274,7 @@ int Queue::chooseCard() {
     //cout << "you chose location " << loc << " card is " << head1->data->CardName << endl;
     return loc;
 }
-void Queue::searchCard(Card^ card1) {
+void Queue::searchCard(CardNamespace::Card^ card1) {
 
     Queue::Node^ head1 = myFront;
     while (head1->data->CardName != card1->CardName) {

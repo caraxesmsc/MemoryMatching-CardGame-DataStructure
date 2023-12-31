@@ -1,12 +1,12 @@
 #include "Stack.h"
 #include "Card.h"
 #include <iostream>
-
-Stack::Stack() : myTop(-1), myCapacity(DEFAULT_CAPACITY), myArray(gcnew cliext::vector<Card^>(DEFAULT_CAPACITY))
+using namespace StackNamespace;
+Stack::Stack() : myTop(-1), myCapacity(DEFAULT_CAPACITY), myArray(gcnew System::Collections::Generic::List<CardNamespace::Card^>(DEFAULT_CAPACITY))
 {
 }
 
-Stack::Stack(int numElements) : myTop(-1), myCapacity(numElements), myArray(gcnew cliext::vector<Card^>(numElements))
+Stack::Stack(int numElements) : myTop(-1), myCapacity(numElements), myArray(gcnew System::Collections::Generic::List<CardNamespace::Card^>(numElements))
 {
 }
 
@@ -15,7 +15,7 @@ const Stack^ Stack::operator=(const Stack^ rhs)
     if (this != rhs)
     {
         myTop = rhs->myTop;
-        myArray = gcnew cliext::vector<Card^>(rhs->myArray);
+        myArray = gcnew System::Collections::Generic::List<CardNamespace::Card^>(rhs->myArray);  // Copy list elements
     }
     return this;
 }
@@ -25,25 +25,26 @@ bool Stack::empty()
     return myTop == -1;
 }
 
-void Stack::push(Card^ value)
+void Stack::push(CardNamespace::Card^ value)
 {
     if (myTop >= myCapacity - 1)
     {
         cerr << "Stack-full! " << endl;
         exit(1);
     }
-    myArray->push_back(value);
+    myArray->Add(value);  // Use Add for lists
     myTop++;
 }
 
-Card^ Stack::top()
+
+CardNamespace::Card^ Stack::top()
 {
     if (!empty())
-        return myArray->at(myTop);
+        return myArray[myTop];
     else
     {
         cerr << "Stack Empty -- Returning garbage." << endl;
-        Card^ garbage = gcnew Card();
+        CardNamespace::Card^ garbage = gcnew CardNamespace::Card();
         return garbage;
     }
 }
@@ -72,10 +73,10 @@ void Stack::pop()
     }
 }
 
-void Stack::createObjectiveStack(cliext::vector<int>^ indexArray)
+void Stack::createObjectiveStack(System::Collections::Generic::List<int>^ indexArray)  // Change parameter type
 {
     for (int i = 0; i < 6; ++i)
     {
-        push(gcnew Card(indexArray[i] * 2));
+        push(gcnew CardNamespace::Card(indexArray[i] * 2));
     }
 }
