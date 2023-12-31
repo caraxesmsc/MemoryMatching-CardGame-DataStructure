@@ -1,6 +1,6 @@
 #pragma once
-#include "NormalModeForm.h"
 #include "HardModeForm.h"
+#include "NormalModeForm2.h"
 namespace MemoryMatchingCardGameDataStructure {
 
 	using namespace System;
@@ -198,7 +198,7 @@ namespace MemoryMatchingCardGameDataStructure {
 	}
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 	//go to normal Mode form
- NormalModeForm^ normalModeForm = gcnew NormalModeForm(playernametb->Text);
+ NormalModeForm2^ normalModeForm = gcnew NormalModeForm2(playernametb->Text);
     normalModeForm->Show();
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -211,5 +211,7 @@ private: System::Void mainForm_Load(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 }
-};
+
+	   };
 }
+

@@ -11,13 +11,14 @@ namespace MemoryMatchingCardGameDataStructure {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
-	public ref class NormalModeForm : public System::Windows::Forms::Form
+	public ref class NormalModeForm2 : public System::Windows::Forms::Form
 	{
 	public:
 		array<String^>^ cardPath = gcnew array<String^>(14);
 		array<String^>^ gridPath = gcnew array<String^>(12);
-		
-		Int32^ touches=0;
+		array<int>^ gridStat = gcnew array<int>(12);
+
+		Int32 touches = 0;
 
 		System::Collections::Generic::List<int>^ indices;
 		System::Collections::Generic::List<int>^ shuffledIndices;
@@ -31,7 +32,7 @@ namespace MemoryMatchingCardGameDataStructure {
 
 	public:
 		String^ playerName;
-		NormalModeForm(void)
+		NormalModeForm2(void)
 		{
 			cardPath[0] = "CardsImages\\back.png";
 			cardPath[1] = "CardsImages\\ace_of_spades.png";
@@ -61,11 +62,24 @@ namespace MemoryMatchingCardGameDataStructure {
 			gridPath[10] = "CardsImages\\back.png";
 			gridPath[11] = "CardsImages\\back.png";
 
+			gridStat[0] = 0;
+			gridStat[1] = 0;
+			gridStat[2] = 0;
+			gridStat[3] = 0;
+			gridStat[4] = 0;
+			gridStat[5] = 0;
+			gridStat[6] = 0;
+			gridStat[7] = 0;
+			gridStat[8] = 0;
+			gridStat[9] = 0;
+			gridStat[10] = 0;
+			gridStat[11] = 0;
+			
 
 			InitializeComponent();
 
 		}
-		NormalModeForm(String^ x)
+		NormalModeForm2(String^ x)
 		{
 
 			indices = gcnew System::Collections::Generic::List<int>(6);
@@ -123,7 +137,18 @@ namespace MemoryMatchingCardGameDataStructure {
 			gridPath[10] = "CardsImages\\back.png";
 			gridPath[11] = "CardsImages\\back.png";
 
-
+			gridStat[0] = 0;
+			gridStat[1] = 0;
+			gridStat[2] = 0;
+			gridStat[3] = 0;
+			gridStat[4] = 0;
+			gridStat[5] = 0;
+			gridStat[6] = 0;
+			gridStat[7] = 0;
+			gridStat[8] = 0;
+			gridStat[9] = 0;
+			gridStat[10] = 0;
+			gridStat[11] = 0;
 
 			InitializeComponent();
 
@@ -133,7 +158,7 @@ namespace MemoryMatchingCardGameDataStructure {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~NormalModeForm()
+		~NormalModeForm2()
 		{
 			if (components)
 			{
@@ -188,7 +213,7 @@ namespace MemoryMatchingCardGameDataStructure {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(NormalModeForm::typeid));
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(NormalModeForm2::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -312,6 +337,8 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Absolute, 20)));
 			this->tableLayoutPanel1->Size = System::Drawing::Size(795, 361);
 			this->tableLayoutPanel1->TabIndex = 14;
+
+
 			// 
 			// pictureBox13
 			// 
@@ -321,7 +348,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox13->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox13->TabIndex = 7;
 			this->pictureBox13->TabStop = false;
-			this->pictureBox13->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox13_Click);
+			this->pictureBox13->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox13_Click);
 			// 
 			// pictureBox12
 			// 
@@ -331,7 +358,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox12->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox12->TabIndex = 6;
 			this->pictureBox12->TabStop = false;
-			this->pictureBox12->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox12_Click);
+			this->pictureBox12->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox12_Click);
 			// 
 			// pictureBox11
 			// 
@@ -341,7 +368,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox11->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox11->TabIndex = 5;
 			this->pictureBox11->TabStop = false;
-			this->pictureBox11->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox11_Click);
+			this->pictureBox11->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox11_Click);
 			// 
 			// pictureBox10
 			// 
@@ -351,7 +378,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox10->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox10->TabIndex = 4;
 			this->pictureBox10->TabStop = false;
-			this->pictureBox10->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox10_Click);
+			this->pictureBox10->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox10_Click);
 			// 
 			// pictureBox03
 			// 
@@ -361,7 +388,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox03->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox03->TabIndex = 3;
 			this->pictureBox03->TabStop = false;
-			this->pictureBox03->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox03_Click);
+			this->pictureBox03->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox03_Click);
 			// 
 			// pictureBox02
 			// 
@@ -371,7 +398,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox02->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox02->TabIndex = 2;
 			this->pictureBox02->TabStop = false;
-			this->pictureBox02->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox02_Click);
+			this->pictureBox02->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox02_Click);
 			// 
 			// pictureBox01
 			// 
@@ -381,7 +408,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox01->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox01->TabIndex = 1;
 			this->pictureBox01->TabStop = false;
-			this->pictureBox01->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox01_Click);
+			this->pictureBox01->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox01_Click);
 			// 
 			// pictureBox00
 			// 
@@ -391,7 +418,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox00->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox00->TabIndex = 0;
 			this->pictureBox00->TabStop = false;
-			this->pictureBox00->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox00_Click);
+			this->pictureBox00->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox00_Click);
 			// 
 			// pictureBox04
 			// 
@@ -401,7 +428,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox04->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox04->TabIndex = 8;
 			this->pictureBox04->TabStop = false;
-			this->pictureBox04->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox04_Click);
+			this->pictureBox04->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox04_Click);
 			// 
 			// pictureBox14
 			// 
@@ -411,7 +438,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox14->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox14->TabIndex = 9;
 			this->pictureBox14->TabStop = false;
-			this->pictureBox14->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox14_Click);
+			this->pictureBox14->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox14_Click);
 			// 
 			// pictureBox05
 			// 
@@ -421,7 +448,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox05->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox05->TabIndex = 10;
 			this->pictureBox05->TabStop = false;
-			this->pictureBox05->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox05_Click);
+			this->pictureBox05->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox05_Click);
 			// 
 			// pictureBox15
 			// 
@@ -431,15 +458,16 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->pictureBox15->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pictureBox15->TabIndex = 11;
 			this->pictureBox15->TabStop = false;
-			this->pictureBox15->Click += gcnew System::EventHandler(this, &NormalModeForm::pictureBox15_Click);
+			this->pictureBox15->Click += gcnew System::EventHandler(this, &NormalModeForm2::pictureBox15_Click);
 			// 
 			// pictureBox1
 			// 
-			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
 			this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->Location = System::Drawing::Point(28, 127);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(882, 461);
+			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 15;
 			this->pictureBox1->TabStop = false;
 			// 
@@ -454,9 +482,8 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->labelPlayerName->Name = L"labelPlayerName";
 			this->labelPlayerName->Size = System::Drawing::Size(0, 50);
 			this->labelPlayerName->TabIndex = 16;
-			
 			// 
-			// NormalModeForm
+			// NormalModeForm2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -470,9 +497,9 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Name = L"NormalModeForm";
+			this->Name = L"NormalModeForm2";
 			this->Text = L"NormalModeForm";
-			this->Load += gcnew System::EventHandler(this, &NormalModeForm::NormalModeForm_Load);
+			this->Load += gcnew System::EventHandler(this, &NormalModeForm2::NormalModeForm_Load);
 			this->tableLayoutPanel1->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox13))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox12))->EndInit();
@@ -523,81 +550,605 @@ namespace MemoryMatchingCardGameDataStructure {
 
 	}
 	private: System::Void pictureBox00_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
 		gridPath[0] = cardPath[shuffledIndices[0]];
 		pictureBox00->ImageLocation = gridPath[0];
 		pictureBox00->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox00->Load();
 
 	}
-	
+
 	private: System::Void pictureBox01_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
 		gridPath[1] = cardPath[shuffledIndices[1]];
 		pictureBox01->ImageLocation = gridPath[1];
 		pictureBox01->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox01->Load();
+
 	}
-	//continue for the rest.
+		   //continue for the rest.
 
 
-private: System::Void pictureBox02_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[2] = cardPath[shuffledIndices[2]];
-	pictureBox02->ImageLocation = gridPath[2];
-	pictureBox02->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox02->Load();
-}
-private: System::Void pictureBox03_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[3] = cardPath[shuffledIndices[3]];
-	pictureBox03->ImageLocation = gridPath[3];
-	pictureBox03->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox03->Load();
-}
-private: System::Void pictureBox04_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[4] = cardPath[shuffledIndices[4]];
-	pictureBox04->ImageLocation = gridPath[4];
-	pictureBox04->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox04->Load();
-}
-private: System::Void pictureBox05_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[5] = cardPath[shuffledIndices[5]];
-	pictureBox05->ImageLocation = gridPath[5];
-	pictureBox05->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox05->Load();
-}
-private: System::Void pictureBox10_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[6] = cardPath[shuffledIndices[6]];
-	pictureBox10->ImageLocation = gridPath[6];
-	pictureBox10->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox10->Load();
-}
-private: System::Void pictureBox11_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[7] = cardPath[shuffledIndices[7]];
-	pictureBox11->ImageLocation = gridPath[7];
-	pictureBox11->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox11->Load();
-}
-private: System::Void pictureBox12_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[8] = cardPath[shuffledIndices[8]];
-	pictureBox12->ImageLocation = gridPath[8];
-	pictureBox12->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox12->Load();
-}
-private: System::Void pictureBox13_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[9] = cardPath[shuffledIndices[9]];
-	pictureBox13->ImageLocation = gridPath[9];
-	pictureBox13->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox13->Load();
-}
-private: System::Void pictureBox14_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[10] = cardPath[shuffledIndices[10]];
-	pictureBox14->ImageLocation = gridPath[10];
-	pictureBox14->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox14->Load();
-}
-private: System::Void pictureBox15_Click(System::Object^ sender, System::EventArgs^ e) {
-gridPath[11] = cardPath[shuffledIndices[11]];
-	pictureBox15->ImageLocation = gridPath[11];
-	pictureBox15->SizeMode = PictureBoxSizeMode::Zoom;
-	pictureBox15->Load();
-}
+	private: System::Void pictureBox02_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[2] = cardPath[shuffledIndices[2]];
+		pictureBox02->ImageLocation = gridPath[2];
+		pictureBox02->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox02->Load();
+
+	}
+	private: System::Void pictureBox03_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[3] = cardPath[shuffledIndices[3]];
+		pictureBox03->ImageLocation = gridPath[3];
+		pictureBox03->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox03->Load();
+
+	}
+	private: System::Void pictureBox04_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[4] = cardPath[shuffledIndices[4]];
+		pictureBox04->ImageLocation = gridPath[4];
+		pictureBox04->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox04->Load();
+
+	}
+	private: System::Void pictureBox05_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[5] = cardPath[shuffledIndices[5]];
+		pictureBox05->ImageLocation = gridPath[5];
+		pictureBox05->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox05->Load();
+
+	}
+	private: System::Void pictureBox10_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[6] = cardPath[shuffledIndices[6]];
+		pictureBox10->ImageLocation = gridPath[6];
+		pictureBox10->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox10->Load();
+
+	}
+	private: System::Void pictureBox11_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[7] = cardPath[shuffledIndices[7]];
+		pictureBox11->ImageLocation = gridPath[7];
+		pictureBox11->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox11->Load();
+
+	}
+	private: System::Void pictureBox12_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[8] = cardPath[shuffledIndices[8]];
+		pictureBox12->ImageLocation = gridPath[8];
+		pictureBox12->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox12->Load();
+
+	}
+	private: System::Void pictureBox13_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[9] = cardPath[shuffledIndices[9]];
+		pictureBox13->ImageLocation = gridPath[9];
+		pictureBox13->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox13->Load();
+
+	}
+	private: System::Void pictureBox14_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[10] = cardPath[shuffledIndices[10]];
+		pictureBox14->ImageLocation = gridPath[10];
+		pictureBox14->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox14->Load();
+
+	}
+	private: System::Void pictureBox15_Click(System::Object^ sender, System::EventArgs^ e) {
+		if (touches == 2) {
+			for (int i = 0; i < 12; i++)
+			{
+				if (gridStat != nullptr) {
+					// Access gridStat members
+
+					if (gridStat[i] == 0) {
+						gridPath[i] = "CardsImages\\back.png";
+
+					}
+				}
+			}
+			pictureBox00->ImageLocation = gridPath[0];
+			pictureBox01->ImageLocation = gridPath[1];
+			pictureBox02->ImageLocation = gridPath[2];
+			pictureBox03->ImageLocation = gridPath[3];
+			pictureBox04->ImageLocation = gridPath[4];
+			pictureBox05->ImageLocation = gridPath[5];
+			pictureBox10->ImageLocation = gridPath[6];
+			pictureBox11->ImageLocation = gridPath[7];
+			pictureBox12->ImageLocation = gridPath[8];
+			pictureBox13->ImageLocation = gridPath[9];
+			pictureBox14->ImageLocation = gridPath[10];
+			pictureBox15->ImageLocation = gridPath[11];
+			pictureBox00->Load();
+			pictureBox01->Load();
+			pictureBox02->Load();
+			pictureBox03->Load();
+			pictureBox04->Load();
+			pictureBox05->Load();
+			pictureBox10->Load();
+			pictureBox11->Load();
+			pictureBox12->Load();
+			pictureBox13->Load();
+			pictureBox14->Load();
+			pictureBox15->Load();
+			touches = 0;
+		}
+		else {
+			touches = touches + 1;
+		}
+		labelPlayerName->Text = touches.ToString();
+		gridPath[11] = cardPath[shuffledIndices[11]];
+		pictureBox15->ImageLocation = gridPath[11];
+		pictureBox15->SizeMode = PictureBoxSizeMode::Zoom;
+		pictureBox15->Load();
+
+	}
+	
+
+
+
+
+
+
 };
 }
+
+

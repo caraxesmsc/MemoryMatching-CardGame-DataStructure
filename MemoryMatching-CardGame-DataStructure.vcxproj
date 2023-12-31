@@ -124,6 +124,7 @@
     <ClCompile Include="HardModeForm.cpp" />
     <ClCompile Include="mainForm.cpp" />
     <ClCompile Include="NormalModeForm.cpp" />
+    <ClCompile Include="NormalModeForm2.cpp" />
     <ClCompile Include="Queue.cpp" />
     <ClCompile Include="Stack.cpp" />
   </ItemGroup>
@@ -138,6 +139,9 @@
     <ClInclude Include="NormalModeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="NormalModeForm2.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
   </ItemGroup>
@@ -150,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NormalModeForm.resx">
       <DependentUpon>NormalModeForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NormalModeForm2.resx">
+      <DependentUpon>NormalModeForm2.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
