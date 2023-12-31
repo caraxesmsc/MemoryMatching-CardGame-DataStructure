@@ -36,6 +36,9 @@
     <ClCompile Include="NormalModeForm2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Congrats.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mainForm.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NormalModeForm2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Congrats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

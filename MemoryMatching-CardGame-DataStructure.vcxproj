@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Congrats.cpp" />
     <ClCompile Include="HardModeForm.cpp" />
     <ClCompile Include="mainForm.cpp" />
     <ClCompile Include="NormalModeForm.cpp" />
@@ -130,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h" />
+    <ClInclude Include="Congrats.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="HardModeForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -146,6 +150,9 @@
     <ClInclude Include="Stack.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Congrats.resx">
+      <DependentUpon>Congrats.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HardModeForm.resx">
       <DependentUpon>HardModeForm.h</DependentUpon>
     </EmbeddedResource>

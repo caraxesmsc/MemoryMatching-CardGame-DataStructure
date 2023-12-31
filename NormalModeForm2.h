@@ -1,7 +1,9 @@
 #pragma once
 #include <ctime>
 #include <stdlib.h>
+#include <iostream> // Include necessary headers directly
 
+#include "Congrats.h"
 namespace MemoryMatchingCardGameDataStructure {
 
 	using namespace System;
@@ -17,11 +19,16 @@ namespace MemoryMatchingCardGameDataStructure {
 		array<String^>^ cardPath = gcnew array<String^>(14);
 		array<String^>^ gridPath = gcnew array<String^>(12);
 		array<int>^ gridStat = gcnew array<int>(12);
-
-		Int32 touches = 0;
-
+		array<int>^ lastPlay = gcnew array<int>(2);
+		Timer^ timer;
+		int remaining;
+		int touches ;
+		int rounds;
+		int elapsedTime;
 		System::Collections::Generic::List<int>^ indices;
 		System::Collections::Generic::List<int>^ shuffledIndices;
+		// System::Collections::Generic::List<int>^ lastPlay;
+
 
 		/*	StackNamespace::Stack^ stack = gcnew StackNamespace::Stack(); */
 
@@ -81,9 +88,17 @@ namespace MemoryMatchingCardGameDataStructure {
 		}
 		NormalModeForm2(String^ x)
 		{
+			timer = gcnew Timer();
+			timer->Interval = 1000;  // Set the interval to 1000 milliseconds (1 second)
 
+			// Hook up the tick event
+			timer->Tick += gcnew EventHandler(this, &NormalModeForm2::OnTimerTick);
+
+			// Start the timer
+			timer->Start();
 			indices = gcnew System::Collections::Generic::List<int>(6);
 			shuffledIndices = gcnew System::Collections::Generic::List<int>(12);
+			//lastPlay = gcnew System::Collections::Generic::List<int>(2);
 
 			srand(time(NULL));
 
@@ -137,23 +152,26 @@ namespace MemoryMatchingCardGameDataStructure {
 			gridPath[10] = "CardsImages\\back.png";
 			gridPath[11] = "CardsImages\\back.png";
 
-			gridStat[0] = 0;
-			gridStat[1] = 0;
-			gridStat[2] = 0;
-			gridStat[3] = 0;
-			gridStat[4] = 0;
-			gridStat[5] = 0;
-			gridStat[6] = 0;
-			gridStat[7] = 0;
-			gridStat[8] = 0;
-			gridStat[9] = 0;
-			gridStat[10] = 0;
-			gridStat[11] = 0;
+			
 
 			InitializeComponent();
 
 		}
-
+		void InitializeTimer()
+		{
+			timer = gcnew Timer();
+			timer->Interval = 1000;  // Set the interval to 1000 milliseconds (1 second)
+			timer->Tick += gcnew EventHandler(this, &NormalModeForm2::OnTimerTick);
+			elapsedTime = 0; // Initialize elapsed time to 0
+			timer->Start();  // Start the timer
+		}
+		// Event handler for the timer tick
+		void OnTimerTick(Object^ sender, EventArgs^ e)
+		{
+			// Increment elapsed time and update label
+			elapsedTime++;
+			label3->Text = "Time: " + elapsedTime.ToString() + " s";
+		}
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -273,7 +291,7 @@ namespace MemoryMatchingCardGameDataStructure {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(204, 50);
 			this->label2->TabIndex = 3;
-			this->label2->Text = L"Round ##";
+			this->label2->Text = L"Rounds: "+rounds.ToString();
 			// 
 			// label3
 			// 
@@ -546,11 +564,18 @@ namespace MemoryMatchingCardGameDataStructure {
 		pictureBox13->Load();
 		pictureBox14->Load();
 		pictureBox15->Load();
-
+		touches = 1;
+		remaining = 6;
+		lastPlay[0] = 1;
+		lastPlay[1] = 0;
+		rounds = 0;
 
 	}
 	private: System::Void pictureBox00_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=0;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -589,18 +614,33 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=0;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[0] = cardPath[shuffledIndices[0]];
 		pictureBox00->ImageLocation = gridPath[0];
 		pictureBox00->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox00->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 
 	private: System::Void pictureBox01_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=1;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -639,20 +679,35 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=1;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[1] = cardPath[shuffledIndices[1]];
 		pictureBox01->ImageLocation = gridPath[1];
 		pictureBox01->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox01->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 		   //continue for the rest.
 
 
 	private: System::Void pictureBox02_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=2;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -691,26 +746,37 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=2;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[2] = cardPath[shuffledIndices[2]];
 		pictureBox02->ImageLocation = gridPath[2];
 		pictureBox02->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox02->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 	private: System::Void pictureBox03_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=3;
+			
 			for (int i = 0; i < 12; i++)
 			{
-				if (gridStat != nullptr) {
-					// Access gridStat members
-
-					if (gridStat[i] == 0) {
-						gridPath[i] = "CardsImages\\back.png";
-
-					}
+				
+				if (gridStat[i] == 0) {
+					gridPath[i] = "CardsImages\\back.png";	
 				}
 			}
 			pictureBox00->ImageLocation = gridPath[0];
@@ -740,17 +806,33 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=3;
 			touches = touches + 1;
 		}
-		labelPlayerName->Text = touches.ToString();
+		
 		gridPath[3] = cardPath[shuffledIndices[3]];
 		pictureBox03->ImageLocation = gridPath[3];
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
+		Congrats^ congratsform = gcnew Congrats(playerName);
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+if(remaining==0){
+   congratsform->Show();
+	}
 		pictureBox03->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox03->Load();
 
 	}
 	private: System::Void pictureBox04_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			
+			lastPlay[1]=4;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -789,17 +871,32 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=4;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[4] = cardPath[shuffledIndices[4]];
 		pictureBox04->ImageLocation = gridPath[4];
 		pictureBox04->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox04->Load();
-
+		if(remaining==0){
+				Congrats^ congratsform = gcnew Congrats(playerName);
+		congratsform->Show();
+			}
 	}
 	private: System::Void pictureBox05_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=5;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -838,17 +935,32 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=5;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[5] = cardPath[shuffledIndices[5]];
 		pictureBox05->ImageLocation = gridPath[5];
 		pictureBox05->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox05->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 	private: System::Void pictureBox10_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=6;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -887,17 +999,32 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=6;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[6] = cardPath[shuffledIndices[6]];
 		pictureBox10->ImageLocation = gridPath[6];
 		pictureBox10->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox10->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 	private: System::Void pictureBox11_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=7;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -936,17 +1063,32 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=7;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[7] = cardPath[shuffledIndices[7]];
 		pictureBox11->ImageLocation = gridPath[7];
 		pictureBox11->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox11->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 	private: System::Void pictureBox12_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=8;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -985,17 +1127,32 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=8;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[8] = cardPath[shuffledIndices[8]];
 		pictureBox12->ImageLocation = gridPath[8];
 		pictureBox12->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox12->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 	private: System::Void pictureBox13_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=9;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -1034,17 +1191,32 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=9;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[9] = cardPath[shuffledIndices[9]];
 		pictureBox13->ImageLocation = gridPath[9];
 		pictureBox13->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox13->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 	private: System::Void pictureBox14_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=10;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -1083,17 +1255,32 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=10;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[10] = cardPath[shuffledIndices[10]];
 		pictureBox14->ImageLocation = gridPath[10];
 		pictureBox14->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox14->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 	private: System::Void pictureBox15_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (touches == 2) {
+		
+		if (touches == 1) {
+			lastPlay[1]=11;
+			
 			for (int i = 0; i < 12; i++)
 			{
 				if (gridStat != nullptr) {
@@ -1132,14 +1319,26 @@ namespace MemoryMatchingCardGameDataStructure {
 			touches = 0;
 		}
 		else {
+			lastPlay[0]=11;
 			touches = touches + 1;
+			if(shuffledIndices[lastPlay[1]]==shuffledIndices[lastPlay[0]]){
+				gridStat[lastPlay[1]]=1;
+				gridStat[lastPlay[0]]=1;
+				remaining--;
+			}
 		}
-		labelPlayerName->Text = touches.ToString();
+	rounds++;
+				this->label2->Text = L"Rounds: "+rounds.ToString();
+
+		
 		gridPath[11] = cardPath[shuffledIndices[11]];
 		pictureBox15->ImageLocation = gridPath[11];
 		pictureBox15->SizeMode = PictureBoxSizeMode::Zoom;
 		pictureBox15->Load();
-
+if(remaining==0){
+		Congrats^ congratsform = gcnew Congrats(playerName);
+   congratsform->Show();
+	}
 	}
 	
 
